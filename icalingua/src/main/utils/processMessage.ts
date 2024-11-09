@@ -388,8 +388,7 @@ const processMessage = async (
                     message.files.push(message.file)
                 } catch (e) {
                     errorHandler(e, true)
-                    message.code = JSON.stringify({ error: e })
-                    message.content = '[语音下载失败]' + m.data.url
+                    message.content = '[语音转换失败]' + e.message + '\n' + m.data.url
                 }
                 lastMessage.content = '[Audio]'
                 break

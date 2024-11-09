@@ -386,9 +386,8 @@ const createProcessMessage = (adapter: typeof oicqAdapter) => {
                         }
                         message.files.push(message.file)
                     } catch (e) {
-                        message.file = null
-                        message.content = '[无法处理的语音]' + m.data.url
-                        message.code = JSON.stringify({ error: e })
+                        console.error(e)
+                        message.content = '[语音转换失败]' + e.message + '\n' + m.data.url
                     }
                     lastMessage.content = '[Audio]'
                     break
