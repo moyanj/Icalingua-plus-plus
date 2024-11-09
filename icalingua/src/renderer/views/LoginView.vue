@@ -88,6 +88,13 @@
                         <el-radio-button label="56">9.0.95</el-radio-button>
                         <el-radio-button label="58">9.1.0</el-radio-button>
                     </el-radio-group>
+                    <span>Watch</span>
+                    <el-radio-group v-model="form.protocol" size="mini">
+                        <el-radio-button label="30002">2.0.5</el-radio-button>
+                        <el-radio-button label="30001">2.0.8</el-radio-button>
+                        <el-radio-button label="3">9.0.1</el-radio-button>
+                        <el-radio-button label="30003">9.0.3</el-radio-button>
+                    </el-radio-group>
                     <span>iPad</span>
                     <el-radio-group v-model="form.protocol" size="mini">
                         <el-radio-button label="9">8.9.33</el-radio-button>
@@ -95,7 +102,6 @@
                     </el-radio-group>
                     <span>Other</span>
                     <el-radio-group v-model="form.protocol" size="mini">
-                        <el-radio-button label="3">Android Watch 9.0.1</el-radio-button>
                         <el-radio-button label="4">macOS 5.9.3</el-radio-button>
                         <el-radio-button label="10">TIM 3.5.1</el-radio-button>
                     </el-radio-group>
