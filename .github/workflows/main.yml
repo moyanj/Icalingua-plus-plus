@@ -175,7 +175,7 @@ jobs:
           name: dist
           path: icalingua/dist
 
-      - uses: uraimo/run-on-arch-action@v2.3.0
+      - uses: uraimo/run-on-arch-action@v2.8.1
         name: build native modules using another arch
         with:
           arch: aarch64
@@ -246,7 +246,7 @@ jobs:
           name: dist
           path: icalingua/dist
 
-      - uses: uraimo/run-on-arch-action@v2.3.0
+      - uses: uraimo/run-on-arch-action@v2.8.1
         name: build native modules using another arch
         with:
           arch: armv7
