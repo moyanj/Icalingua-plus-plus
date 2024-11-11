@@ -31,6 +31,7 @@
                 <div class="protocols">
                     <span>Android Phone</span>
                     <el-radio-group v-model="form.protocol" size="mini">
+                        <el-radio-button label="10001">8.2.11</el-radio-button>
                         <el-radio-button label="6">8.8.88</el-radio-button>
                         <el-radio-button label="7">8.9.33</el-radio-button>
                         <el-radio-button label="1">8.9.50</el-radio-button>
@@ -102,7 +103,7 @@
                     </el-radio-group>
                     <span>Other</span>
                     <el-radio-group v-model="form.protocol" size="mini">
-                        <el-radio-button label="4">macOS 5.9.3</el-radio-button>
+                        <el-radio-button label="4">macOS 6.8.2</el-radio-button>
                         <el-radio-button label="10">TIM 3.5.1</el-radio-button>
                     </el-radio-group>
                 </div>
