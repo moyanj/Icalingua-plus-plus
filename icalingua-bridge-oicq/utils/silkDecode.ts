@@ -19,7 +19,14 @@ export default async (url: string) => {
     if (!fs.existsSync(rawFilePath)) {
         fs.writeFileSync(rawFilePath, res.data)
     }
-    await conventSilk(rawFilePath, filePath)
+    try {
+        await conventSilk(rawFilePath, filePath)
+    } catch (e) {
+        if (fs.existsSync(filePath)) {
+            return md5 + '.ogg'
+        }
+        throw e
+    }
     return md5 + '.ogg'
 }
 

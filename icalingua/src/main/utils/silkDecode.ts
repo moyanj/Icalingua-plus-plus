@@ -3,6 +3,7 @@ import { fork } from 'child_process'
 import { app } from 'electron'
 import fs from 'fs'
 import getStaticPath from '../../utils/getStaticPath'
+import errorHandler from './errorHandler'
 
 export default async (url: string) => {
     const res = await axios.get<Buffer>(url, {
@@ -22,7 +23,14 @@ export default async (url: string) => {
     if (!fs.existsSync(rawFilePath)) {
         fs.writeFileSync(rawFilePath, res.data)
     }
-    await conventSilk(rawFilePath, filePath)
+    try {
+        await conventSilk(rawFilePath, filePath)
+    } catch (e) {
+        if (fs.existsSync(filePath)) {
+            return md5 + '.ogg'
+        }
+        errorHandler(e)
+    }
     return md5 + '.ogg'
 }
 
