@@ -12,8 +12,10 @@
                 <el-button
                     type="primary"
                     @click="stopForward(true)"
+                    @contextmenu.prevent.native="stopForward(true, true, true)"
                     :disabled="msgsToForward.length === 0"
                     icon="el-icon-share"
+                    title="右键合并转发（隐藏发送者）"
                     >合并转发</el-button
                 >
                 <el-button
@@ -62,8 +64,8 @@ export default {
         roomId: { type: [String, Number], required: true },
     },
     methods: {
-        stopForward(isCreate, multi = true) {
-            if (isCreate) this.$emit('choose-forward-target', multi)
+        stopForward(isCreate, multi = true, anonymous = false) {
+            if (isCreate) this.$emit('choose-forward-target', multi, anonymous)
             else this.$emit('close-forward-panel')
         },
         recallMsgs() {

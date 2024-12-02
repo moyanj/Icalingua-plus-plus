@@ -225,7 +225,7 @@
                 :messages="messages"
                 :showForwardPanel="showForwardPanel"
                 :msgsToForward="msgsToForward"
-                @choose-forward-target="$emit('choose-forward-target', $event)"
+                v-on="$listeners"
                 @close-forward-panel="closeForwardPanel"
                 :account="account"
                 :username="username"
@@ -923,7 +923,7 @@ export default {
         }
     },
     methods: {
-        sendForward(target, name, multi = true) {
+        sendForward(target, name, multi = true, anonymous = false) {
             const isJSON = (str) => {
                 try {
                     if (typeof JSON.parse(str) == 'object') return true
@@ -1083,6 +1083,11 @@ export default {
                     }
                     singleMessage.nickname = msg.senderId !== this.account ? msg.username : this.username
                     singleMessage.time = Math.floor(msg.time / 1000)
+                    if (anonymous) {
+                        singleMessage.user_id = 1094950020
+                        singleMessage.nickname = 'QQ用户'
+                        if (singleMessage.bubble_id) singleMessage.bubble_id = -1
+                    }
                     messagesToSend.push(singleMessage)
                 }
             })

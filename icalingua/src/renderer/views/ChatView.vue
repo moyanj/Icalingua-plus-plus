@@ -191,7 +191,7 @@
         <el-dialog title="联系人" :visible.sync="contactsShown" top="5vh" class="dialog">
             <TheContactsPanel @dblclick="startChat" :removeGroupNameEmotes="removeGroupNameEmotes" />
         </el-dialog>
-        <el-dialog title="转发到..." :visible.sync="forwardShown" top="5vh" class="dialog">
+        <el-dialog :title="forwardTitle" :visible.sync="forwardShown" top="5vh" class="dialog">
             <TheContactsPanel @click="sendForward" :removeGroupNameEmotes="removeGroupNameEmotes" />
         </el-dialog>
         <el-dialog title="群成员" :visible.sync="groupmemberShown" top="5vh" class="dialog">
@@ -304,6 +304,7 @@ export default {
             roomPanelWidth: undefined,
             forwardShown: false,
             forwardMulti: false,
+            forwardAnonymous: false,
             lastUnreadCount: 0,
             lastUnreadCheck: 0,
             lastUnreadAt: false,
@@ -959,12 +960,14 @@ Chromium ${process.versions.chrome}` : ''
             ipc.setRoomPanelSetting(this.roomPanelAvatarOnly, width)
         },
         sendForward(id, name) {
-            this.$refs.room.sendForward(id, name, this.forwardMulti)
+            this.$refs.room.sendForward(id, name, this.forwardMulti, this.forwardAnonymous)
             this.forwardShown = false
         },
-        chooseForwardTarget(multi = true) {
+        chooseForwardTarget(multi = true, anonymous = false) {
             this.forwardShown = true
             this.forwardMulti = multi
+            this.forwardAnonymous = anonymous
+            console.log('forwardMulti', multi, 'forwardAnonymous', anonymous)
         },
         editChatGroups() {
             this.$prompt('请输入新聊天分组名字', '提示', {
@@ -1126,6 +1129,9 @@ Chromium ${process.versions.chrome}` : ''
         selectedRoom() {
             return this.rooms.find(e => e.roomId === this.selectedRoomId) || {roomId: 0}
         },
+        forwardTitle() {
+            return (this.forwardAnonymous ? '隐藏发送者后' : '') + (this.forwardMulti ? '合并' : '逐条') + '转发到...'
+        }
     },
     watch: {
         lastUnreadCount(n, o) {
