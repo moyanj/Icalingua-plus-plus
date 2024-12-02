@@ -2370,6 +2370,7 @@ const adapter: OicqAdapter = {
         }
         isAutoFetching = false
         ui.messageSuccess('历史消息获取完成')
+        console.log('历史消息获取完成')
     },
 
     async getRoamingStamp(no_cache?: boolean): Promise<RoamingStamp[]> {

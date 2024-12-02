@@ -2073,6 +2073,7 @@ const adapter = {
         }
         isAutoFetching = false
         clients.messageSuccess('历史消息获取完成')
+        console.log('历史消息获取完成')
     },
     async sendOnlineData() {
         clients.sendOnlineData({
