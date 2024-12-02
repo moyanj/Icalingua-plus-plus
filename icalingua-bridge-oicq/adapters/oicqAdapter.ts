@@ -1583,6 +1583,13 @@ const adapter = {
             }
             bot.setMaxListeners(233)
             attachLoginHandler()
+            if (config.custom) {
+                try {
+                    require('../custom').onCreated(bot)
+                } catch (e) {
+                    console.error(e)
+                }
+            }
         }
         loginForm = form
         bot.login(form.password)

@@ -1831,6 +1831,15 @@ const adapter: OicqAdapter = {
             }
             bot.setMaxListeners(233)
             attachLoginHandler()
+            if (getConfig().custom) {
+                const custom_path = path.join(app.getPath('userData'), 'custom')
+                const requireFunc = eval('require')
+                try {
+                    requireFunc(custom_path).onCreated(bot)
+                } catch (e) {
+                    errorHandler(e, true)
+                }
+            }
         }
         loginForm = form
         bot.login(form.password)
