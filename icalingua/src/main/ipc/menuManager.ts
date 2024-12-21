@@ -2019,6 +2019,7 @@ ipcMain.on('popupMessageMenu', async (_, e, room: Room, message: Message, sect?:
                     fileMenu.append(
                         new MenuItem({
                             label: '刷新视频地址',
+                            visible: !history,
                             click: async () => {
                                 const newUrl = await getMsgNewURL(String(message._id))
                                 if (newUrl !== 'error') {
